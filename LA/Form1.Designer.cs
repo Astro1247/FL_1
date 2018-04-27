@@ -47,10 +47,13 @@ namespace LA
             this.vtMatrixBox = new System.Windows.Forms.TextBox();
             this.wMatrixBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pseudoRightPartBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.calulatePseudoButton = new System.Windows.Forms.Button();
+            this.pseudoUnknownVatiablesBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pseudoResultMatrixBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // baseMatrixBox
@@ -105,7 +108,7 @@ namespace LA
             // 
             this.button1.Location = new System.Drawing.Point(9, 716);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(297, 23);
+            this.button1.Size = new System.Drawing.Size(302, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "Умножить транспонированую матрицу на изначальную";
             this.button1.UseVisualStyleBackColor = true;
@@ -118,14 +121,14 @@ namespace LA
             this.multipliedBaseTrans.Multiline = true;
             this.multipliedBaseTrans.Name = "multipliedBaseTrans";
             this.multipliedBaseTrans.ReadOnly = true;
-            this.multipliedBaseTrans.Size = new System.Drawing.Size(296, 176);
+            this.multipliedBaseTrans.Size = new System.Drawing.Size(301, 176);
             this.multipliedBaseTrans.TabIndex = 10;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(326, 42);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 38);
+            this.button2.Size = new System.Drawing.Size(190, 38);
             this.button2.TabIndex = 11;
             this.button2.Text = "Выполнить сингулярное разложение";
             this.button2.UseVisualStyleBackColor = true;
@@ -146,7 +149,7 @@ namespace LA
             this.singularVectorBox.Multiline = true;
             this.singularVectorBox.Name = "singularVectorBox";
             this.singularVectorBox.ReadOnly = true;
-            this.singularVectorBox.Size = new System.Drawing.Size(190, 55);
+            this.singularVectorBox.Size = new System.Drawing.Size(207, 55);
             this.singularVectorBox.TabIndex = 13;
             // 
             // label3
@@ -203,50 +206,81 @@ namespace LA
             this.label5.TabIndex = 18;
             this.label5.Text = "W матрица";
             // 
-            // textBox1
+            // pseudoRightPartBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(542, 323);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(207, 96);
-            this.textBox1.TabIndex = 21;
+            this.pseudoRightPartBox.Location = new System.Drawing.Point(542, 346);
+            this.pseudoRightPartBox.Multiline = true;
+            this.pseudoRightPartBox.Name = "pseudoRightPartBox";
+            this.pseudoRightPartBox.Size = new System.Drawing.Size(207, 96);
+            this.pseudoRightPartBox.TabIndex = 21;
+            this.pseudoRightPartBox.Text = "3\r\n4\r\n0";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(539, 307);
+            this.label6.Location = new System.Drawing.Point(468, 307);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(138, 13);
             this.label6.TabIndex = 20;
             this.label6.Text = "Псевдообратная матрица";
             // 
-            // button3
+            // calulatePseudoButton
             // 
-            this.button3.Location = new System.Drawing.Point(425, 425);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(213, 23);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "Посчитать псевдообратную матрицу";
-            this.button3.UseVisualStyleBackColor = true;
+            this.calulatePseudoButton.Location = new System.Drawing.Point(441, 448);
+            this.calulatePseudoButton.Name = "calulatePseudoButton";
+            this.calulatePseudoButton.Size = new System.Drawing.Size(213, 23);
+            this.calulatePseudoButton.TabIndex = 22;
+            this.calulatePseudoButton.Text = "Посчитать псевдообратную матрицу";
+            this.calulatePseudoButton.UseVisualStyleBackColor = true;
+            this.calulatePseudoButton.Click += new System.EventHandler(this.calcPseudo);
             // 
-            // textBox2
+            // pseudoUnknownVatiablesBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(326, 323);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(207, 96);
-            this.textBox2.TabIndex = 23;
+            this.pseudoUnknownVatiablesBox.Location = new System.Drawing.Point(326, 346);
+            this.pseudoUnknownVatiablesBox.Multiline = true;
+            this.pseudoUnknownVatiablesBox.Name = "pseudoUnknownVatiablesBox";
+            this.pseudoUnknownVatiablesBox.ReadOnly = true;
+            this.pseudoUnknownVatiablesBox.Size = new System.Drawing.Size(207, 96);
+            this.pseudoUnknownVatiablesBox.TabIndex = 23;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(326, 327);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Неизвестные";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(539, 327);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Правая часть";
+            // 
+            // pseudoResultMatrixBox
+            // 
+            this.pseudoResultMatrixBox.Location = new System.Drawing.Point(441, 477);
+            this.pseudoResultMatrixBox.Multiline = true;
+            this.pseudoResultMatrixBox.Name = "pseudoResultMatrixBox";
+            this.pseudoResultMatrixBox.ReadOnly = true;
+            this.pseudoResultMatrixBox.Size = new System.Drawing.Size(213, 96);
+            this.pseudoResultMatrixBox.TabIndex = 26;
             // 
             // MatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 745);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pseudoResultMatrixBox);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pseudoUnknownVatiablesBox);
+            this.Controls.Add(this.calulatePseudoButton);
+            this.Controls.Add(this.pseudoRightPartBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.wMatrixBox);
             this.Controls.Add(this.label5);
@@ -292,10 +326,13 @@ namespace LA
         private TextBox vtMatrixBox;
         private TextBox wMatrixBox;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox pseudoRightPartBox;
         private Label label6;
-        private Button button3;
-        private TextBox textBox2;
+        private Button calulatePseudoButton;
+        private TextBox pseudoUnknownVatiablesBox;
+        private Label label7;
+        private Label label8;
+        private TextBox pseudoResultMatrixBox;
     }
 }
 

@@ -89,5 +89,15 @@ namespace LA
             }
             wMatrixBox.Text = Wmatrix.ToString();
         }
+
+        private void calcPseudo(object sender, EventArgs e)
+        {
+            Matrix matr1 = Matrix.Parse(baseMatrixBox.Text);
+            Matrix invMatr = matr1.GetPseudoInverse();
+            pseudoResultMatrixBox.Text = invMatr.ToString();
+            Matrix rhs = Matrix.Parse(pseudoRightPartBox.Text);
+            Matrix sol = Matrix.Multiply(invMatr, rhs);
+            pseudoUnknownVatiablesBox.Text = sol.ToString();
+        }
     }
 }
