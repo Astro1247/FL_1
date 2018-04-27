@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
@@ -23,7 +16,6 @@ namespace LA
             baseMatrixBox.Text = Matrix.Parse(baseMatrixBox.Text).ToString();
             var baseMatrix = Matrix.Parse(baseMatrixBox.Text);
             transposedMatrixBox.Text = Matrix.Transpose(baseMatrix).ToString();
-            //Matrix.GetSvd(baseMatrix);
         }
 
         private void MultiplyBaseMatrixWithTrans(object sender, EventArgs e)
@@ -36,19 +28,16 @@ namespace LA
 
         private void DoSvd(object sender, EventArgs e)
         {
-            MathNet.Numerics.LinearAlgebra.Factorization.Svd<double> svd = Matrix.GetSvd(Matrix.Parse(baseMatrixBox.Text));
+            Svd<double> svd = Matrix.GetSvd(Matrix.Parse(baseMatrixBox.Text));
 
             //Заполняем координаты сингулярного вектора
-            double[] singularVectorCoordinates = new double[3];
-            int i = 0;
             foreach (var row in svd.S)
             {
                 singularVectorBox.Text += double.Parse(row.ToString())+"\r\n";
             }
-            //singularVectorBox.Text = singularVectorCoordinates.ToString();
 
             //Выводим U матрицу в соответствующий бокс
-            i = 0;
+            int i = 0;
             double[] Uvalues = new double[svd.U.ColumnCount*svd.U.RowCount];
             foreach (var vals in svd.U.Storage.Enumerate())
             {

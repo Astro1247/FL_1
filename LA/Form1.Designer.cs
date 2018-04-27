@@ -1,11 +1,14 @@
-﻿namespace LA
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace LA
 {
     partial class MatrixForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -229,22 +232,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox baseMatrixBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button transponovanaButton;
-        private System.Windows.Forms.TextBox transposedMatrixBox;
-        private System.Windows.Forms.Label lblPseudoInverse;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox multipliedBaseTrans;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox singularVectorBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox uMatrixBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox vtMatrixBox;
-        private System.Windows.Forms.TextBox wMatrixBox;
-        private System.Windows.Forms.Label label5;
+        private TextBox baseMatrixBox;
+        private Label label1;
+        private Button transponovanaButton;
+        private TextBox transposedMatrixBox;
+        private Label lblPseudoInverse;
+        private Button button1;
+        private TextBox multipliedBaseTrans;
+        private Button button2;
+        private Label label2;
+        private TextBox singularVectorBox;
+        private Label label3;
+        private TextBox uMatrixBox;
+        private Label label4;
+        private TextBox vtMatrixBox;
+        private TextBox wMatrixBox;
+        private Label label5;
     }
 }
 
