@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
@@ -10,7 +11,7 @@ namespace LA
         {
             InitializeComponent();
         }
-
+        
         public void GetTransMatrix(object sender, EventArgs e)
         {
             baseMatrixBox.Text = Matrix.Parse(baseMatrixBox.Text).ToString();
@@ -22,7 +23,8 @@ namespace LA
         {
             Matrix matr1 = Matrix.Parse(baseMatrixBox.Text);
             Matrix matr2 = Matrix.Parse(transposedMatrixBox.Text);
-            Matrix resultMatrix = Matrix.Multiply(matr1, matr2);
+            Matrix resultMatrix = matr1 * matr2;
+            if (resultMatrix == null) throw new ArgumentNullException(nameof(resultMatrix));
             multipliedBaseTrans.Text = resultMatrix.ToString();
         }
 
@@ -33,71 +35,71 @@ namespace LA
             //Заполняем координаты сингулярного вектора
             foreach (var row in svd.S)
             {
-                singularVectorBox.Text += double.Parse(row.ToString())+"\r\n";
+                singularVectorBox.Text += double.Parse(row.ToString(CultureInfo.CurrentCulture))+Environment.NewLine;
             }
 
             //Выводим U матрицу в соответствующий бокс
             int i = 0;
-            double[] Uvalues = new double[svd.U.ColumnCount*svd.U.RowCount];
+            double[] uValues = new double[svd.U.ColumnCount*svd.U.RowCount];
             foreach (var vals in svd.U.Storage.Enumerate())
             {
-                Uvalues[i++] = double.Parse(vals.ToString());
+                uValues[i++] = double.Parse(vals.ToString(CultureInfo.CurrentCulture));
             }
             i = 0;
-            Matrix Umatrix = Matrix.IdentityMatrix(svd.U.RowCount, svd.U.ColumnCount);
-            for (int j = 0; j < Umatrix.Rows; j++)
+            Matrix uMatrix = Matrix.IdentityMatrix(svd.U.RowCount, svd.U.ColumnCount);
+            for (int j = 0; j < uMatrix.Rows; j++)
             {
-                for (int k = 0; k < Umatrix.Columns; k++)
+                for (int k = 0; k < uMatrix.Columns; k++)
                 {
-                    Umatrix[j, k] = Uvalues[i++];
+                    uMatrix[j, k] = uValues[i++];
                 }
             }
-            uMatrixBox.Text = Umatrix.ToString();
+            uMatrixBox.Text = uMatrix.ToString();
 
             //Аналогично выводим VT и W матрицы
             i = 0;
-            double[] VTvalues = new double[svd.VT.ColumnCount * svd.VT.RowCount];
+            double[] vTvalues = new double[svd.VT.ColumnCount * svd.VT.RowCount];
             foreach (var vals in svd.VT.Storage.Enumerate())
             {
-                VTvalues[i++] = double.Parse(vals.ToString());
+                vTvalues[i++] = double.Parse(vals.ToString(CultureInfo.CurrentCulture));
             }
             i = 0;
-            Matrix VTmatrix = Matrix.IdentityMatrix(svd.VT.RowCount, svd.VT.ColumnCount);
-            for (int j = 0; j < VTmatrix.Rows; j++)
+            Matrix vTmatrix = Matrix.IdentityMatrix(svd.VT.RowCount, svd.VT.ColumnCount);
+            for (int j = 0; j < vTmatrix.Rows; j++)
             {
-                for (int k = 0; k < VTmatrix.Columns; k++)
+                for (int k = 0; k < vTmatrix.Columns; k++)
                 {
-                    VTmatrix[j, k] = VTvalues[i++];
+                    vTmatrix[j, k] = vTvalues[i++];
                 }
             }
-            vtMatrixBox.Text = VTmatrix.ToString();
+            vtMatrixBox.Text = vTmatrix.ToString();
 
             i = 0;
-            double[] Wvalues = new double[svd.W.ColumnCount * svd.W.RowCount];
+            double[] wValues = new double[svd.W.ColumnCount * svd.W.RowCount];
             foreach (var vals in svd.W.Storage.Enumerate())
             {
-                Wvalues[i++] = double.Parse(vals.ToString());
+                wValues[i++] = double.Parse(vals.ToString(CultureInfo.CurrentCulture));
             }
             i = 0;
-            Matrix Wmatrix = Matrix.IdentityMatrix(svd.W.RowCount, svd.W.ColumnCount);
-            for (int j = 0; j < Wmatrix.Rows; j++)
+            Matrix wMatrix = Matrix.IdentityMatrix(svd.W.RowCount, svd.W.ColumnCount);
+            for (int j = 0; j < wMatrix.Rows; j++)
             {
-                for (int k = 0; k < Wmatrix.Columns; k++)
+                for (int k = 0; k < wMatrix.Columns; k++)
                 {
-                    Wmatrix[j, k] = Wvalues[i++];
+                    wMatrix[j, k] = wValues[i++];
                 }
             }
-            wMatrixBox.Text = Wmatrix.ToString();
+            wMatrixBox.Text = wMatrix.ToString();
         }
 
-        private void calcPseudo(object sender, EventArgs e)
+        private void CalcPseudo(object sender, EventArgs e)
         {
             Matrix matr1 = Matrix.Parse(baseMatrixBox.Text);
             Matrix invMatr = matr1.GetPseudoInverse();
             pseudoResultMatrixBox.Text = invMatr.ToString();
-            Matrix rhs = Matrix.Parse(pseudoRightPartBox.Text);
-            Matrix sol = Matrix.Multiply(invMatr, rhs);
-            pseudoUnknownVatiablesBox.Text = sol.ToString();
+            Matrix rightPart = Matrix.Parse(pseudoRightPartBox.Text);
+            Matrix solutionMatrix = invMatr * rightPart;
+            pseudoUnknownVatiablesBox.Text = solutionMatrix.ToString();
         }
     }
 }

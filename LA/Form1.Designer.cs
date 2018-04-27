@@ -213,7 +213,7 @@ namespace LA
             this.pseudoRightPartBox.Name = "pseudoRightPartBox";
             this.pseudoRightPartBox.Size = new System.Drawing.Size(207, 96);
             this.pseudoRightPartBox.TabIndex = 21;
-            this.pseudoRightPartBox.Text = "3\r\n4\r\n0";
+            this.pseudoRightPartBox.Text = "3\r\n6\r\n0\r\n\r\n";
             // 
             // label6
             // 
@@ -232,7 +232,7 @@ namespace LA
             this.calulatePseudoButton.TabIndex = 22;
             this.calulatePseudoButton.Text = "Посчитать псевдообратную матрицу";
             this.calulatePseudoButton.UseVisualStyleBackColor = true;
-            this.calulatePseudoButton.Click += new System.EventHandler(this.calcPseudo);
+            this.calulatePseudoButton.Click += new System.EventHandler(this.CalcPseudo);
             // 
             // pseudoUnknownVatiablesBox
             // 
