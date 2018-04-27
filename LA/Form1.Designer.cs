@@ -47,6 +47,10 @@ namespace LA
             this.vtMatrixBox = new System.Windows.Forms.TextBox();
             this.wMatrixBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // baseMatrixBox
@@ -166,7 +170,7 @@ namespace LA
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(323, 283);
+            this.label4.Location = new System.Drawing.Point(539, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 16;
@@ -174,7 +178,7 @@ namespace LA
             // 
             // vtMatrixBox
             // 
-            this.vtMatrixBox.Location = new System.Drawing.Point(326, 299);
+            this.vtMatrixBox.Location = new System.Drawing.Point(542, 58);
             this.vtMatrixBox.Multiline = true;
             this.vtMatrixBox.Name = "vtMatrixBox";
             this.vtMatrixBox.ReadOnly = true;
@@ -183,7 +187,7 @@ namespace LA
             // 
             // wMatrixBox
             // 
-            this.wMatrixBox.Location = new System.Drawing.Point(326, 417);
+            this.wMatrixBox.Location = new System.Drawing.Point(542, 178);
             this.wMatrixBox.Multiline = true;
             this.wMatrixBox.Name = "wMatrixBox";
             this.wMatrixBox.ReadOnly = true;
@@ -193,17 +197,57 @@ namespace LA
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(323, 401);
+            this.label5.Location = new System.Drawing.Point(539, 162);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 18;
             this.label5.Text = "W матрица";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(542, 323);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(207, 96);
+            this.textBox1.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(539, 307);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Псевдообратная матрица";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(425, 425);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(213, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "Посчитать псевдообратную матрицу";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(326, 323);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(207, 96);
+            this.textBox2.TabIndex = 23;
+            // 
             // MatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 745);
+            this.ClientSize = new System.Drawing.Size(777, 745);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.wMatrixBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.vtMatrixBox);
@@ -248,6 +292,10 @@ namespace LA
         private TextBox vtMatrixBox;
         private TextBox wMatrixBox;
         private Label label5;
+        private TextBox textBox1;
+        private Label label6;
+        private Button button3;
+        private TextBox textBox2;
     }
 }
 
