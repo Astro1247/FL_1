@@ -47,24 +47,58 @@ namespace LA
             }
             //singularVectorBox.Text = singularVectorCoordinates.ToString();
 
-            //Заполняем U матрицу
+            //Выводим U матрицу в соответствующий бокс
             i = 0;
-            double[] values = new double[svd.U.ColumnCount*svd.U.RowCount];
-            string valuesStr = "";
+            double[] Uvalues = new double[svd.U.ColumnCount*svd.U.RowCount];
             foreach (var vals in svd.U.Storage.Enumerate())
             {
-                values[i++] = double.Parse(vals.ToString());
+                Uvalues[i++] = double.Parse(vals.ToString());
             }
             i = 0;
             Matrix Umatrix = Matrix.IdentityMatrix(svd.U.RowCount, svd.U.ColumnCount);
-            for (int j = 0; j < Umatrix.Columns; j++)
+            for (int j = 0; j < Umatrix.Rows; j++)
             {
-                for (int k = 0; k < Umatrix.Rows; k++)
+                for (int k = 0; k < Umatrix.Columns; k++)
                 {
-                    Umatrix[j, k] = values[i++];
+                    Umatrix[j, k] = Uvalues[i++];
                 }
             }
             uMatrixBox.Text = Umatrix.ToString();
+
+            //Аналогично выводим VT и W матрицы
+            i = 0;
+            double[] VTvalues = new double[svd.VT.ColumnCount * svd.VT.RowCount];
+            foreach (var vals in svd.VT.Storage.Enumerate())
+            {
+                VTvalues[i++] = double.Parse(vals.ToString());
+            }
+            i = 0;
+            Matrix VTmatrix = Matrix.IdentityMatrix(svd.VT.RowCount, svd.VT.ColumnCount);
+            for (int j = 0; j < VTmatrix.Rows; j++)
+            {
+                for (int k = 0; k < VTmatrix.Columns; k++)
+                {
+                    VTmatrix[j, k] = VTvalues[i++];
+                }
+            }
+            vtMatrixBox.Text = VTmatrix.ToString();
+
+            i = 0;
+            double[] Wvalues = new double[svd.W.ColumnCount * svd.W.RowCount];
+            foreach (var vals in svd.W.Storage.Enumerate())
+            {
+                Wvalues[i++] = double.Parse(vals.ToString());
+            }
+            i = 0;
+            Matrix Wmatrix = Matrix.IdentityMatrix(svd.W.RowCount, svd.W.ColumnCount);
+            for (int j = 0; j < Wmatrix.Rows; j++)
+            {
+                for (int k = 0; k < Wmatrix.Columns; k++)
+                {
+                    Wmatrix[j, k] = Wvalues[i++];
+                }
+            }
+            wMatrixBox.Text = Wmatrix.ToString();
         }
     }
 }
