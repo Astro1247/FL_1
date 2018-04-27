@@ -1,6 +1,6 @@
 ﻿namespace LA
 {
-    partial class Form1
+    partial class MatrixForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,28 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtMatrix = new System.Windows.Forms.TextBox();
+            this.baseMatrixBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMultiply = new System.Windows.Forms.Label();
-            this.txtSolution = new System.Windows.Forms.TextBox();
-            this.lblEqual = new System.Windows.Forms.Label();
-            this.txtB = new System.Windows.Forms.TextBox();
-            this.btnClick = new System.Windows.Forms.Button();
-            this.txtPInv = new System.Windows.Forms.TextBox();
+            this.transponovanaButton = new System.Windows.Forms.Button();
+            this.transposedMatrixBox = new System.Windows.Forms.TextBox();
             this.lblPseudoInverse = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.multipliedBaseTrans = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.singularVectorBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.uMatrixBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.vtMatrixBox = new System.Windows.Forms.TextBox();
+            this.wMatrixBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtMatrix
+            // baseMatrixBox
             // 
-            this.txtMatrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtMatrix.Location = new System.Drawing.Point(12, 43);
-            this.txtMatrix.Multiline = true;
-            this.txtMatrix.Name = "txtMatrix";
-            this.txtMatrix.Size = new System.Drawing.Size(305, 247);
-            this.txtMatrix.TabIndex = 0;
-            this.txtMatrix.Text = " 1 -1   2  0\r\n-1  2  -3  1\r\n 0  1  -1  1";
+            this.baseMatrixBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.baseMatrixBox.Location = new System.Drawing.Point(12, 43);
+            this.baseMatrixBox.Multiline = true;
+            this.baseMatrixBox.Name = "baseMatrixBox";
+            this.baseMatrixBox.Size = new System.Drawing.Size(305, 247);
+            this.baseMatrixBox.TabIndex = 0;
+            this.baseMatrixBox.Text = " 1 -1   2  0\r\n-1  2  -3  1\r\n 0  1  -1  1";
             // 
             // label1
             // 
@@ -60,108 +65,162 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Матриця системи";
             // 
-            // lblMultiply
+            // transponovanaButton
             // 
-            this.lblMultiply.AutoSize = true;
-            this.lblMultiply.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblMultiply.Location = new System.Drawing.Point(323, 153);
-            this.lblMultiply.Name = "lblMultiply";
-            this.lblMultiply.Size = new System.Drawing.Size(25, 31);
-            this.lblMultiply.TabIndex = 2;
-            this.lblMultiply.Text = "*";
+            this.transponovanaButton.Location = new System.Drawing.Point(10, 505);
+            this.transponovanaButton.Name = "transponovanaButton";
+            this.transponovanaButton.Size = new System.Drawing.Size(301, 23);
+            this.transponovanaButton.TabIndex = 6;
+            this.transponovanaButton.Text = "Обчислити транспоньовану матрицю";
+            this.transponovanaButton.UseVisualStyleBackColor = true;
+            this.transponovanaButton.Click += new System.EventHandler(this.GetTransMatrix);
             // 
-            // txtSolution
+            // transposedMatrixBox
             // 
-            this.txtSolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSolution.Location = new System.Drawing.Point(354, 43);
-            this.txtSolution.Multiline = true;
-            this.txtSolution.Name = "txtSolution";
-            this.txtSolution.Size = new System.Drawing.Size(80, 247);
-            this.txtSolution.TabIndex = 3;
-            // 
-            // lblEqual
-            // 
-            this.lblEqual.AutoSize = true;
-            this.lblEqual.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblEqual.Location = new System.Drawing.Point(446, 153);
-            this.lblEqual.Name = "lblEqual";
-            this.lblEqual.Size = new System.Drawing.Size(30, 31);
-            this.lblEqual.TabIndex = 4;
-            this.lblEqual.Text = "=";
-            // 
-            // txtB
-            // 
-            this.txtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtB.Location = new System.Drawing.Point(493, 43);
-            this.txtB.Multiline = true;
-            this.txtB.Name = "txtB";
-            this.txtB.Size = new System.Drawing.Size(80, 247);
-            this.txtB.TabIndex = 5;
-            this.txtB.Text = "3\r\n6\r\n0";
-            // 
-            // btnClick
-            // 
-            this.btnClick.Location = new System.Drawing.Point(12, 311);
-            this.btnClick.Name = "btnClick";
-            this.btnClick.Size = new System.Drawing.Size(301, 23);
-            this.btnClick.TabIndex = 6;
-            this.btnClick.Text = "Обчислити псевдообернену матрицю";
-            this.btnClick.UseVisualStyleBackColor = true;
-            this.btnClick.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtPInv
-            // 
-            this.txtPInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtPInv.Location = new System.Drawing.Point(12, 371);
-            this.txtPInv.Multiline = true;
-            this.txtPInv.Name = "txtPInv";
-            this.txtPInv.Size = new System.Drawing.Size(299, 176);
-            this.txtPInv.TabIndex = 7;
+            this.transposedMatrixBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.transposedMatrixBox.Location = new System.Drawing.Point(12, 323);
+            this.transposedMatrixBox.Multiline = true;
+            this.transposedMatrixBox.Name = "transposedMatrixBox";
+            this.transposedMatrixBox.ReadOnly = true;
+            this.transposedMatrixBox.Size = new System.Drawing.Size(299, 176);
+            this.transposedMatrixBox.TabIndex = 7;
             // 
             // lblPseudoInverse
             // 
             this.lblPseudoInverse.AutoSize = true;
-            this.lblPseudoInverse.Location = new System.Drawing.Point(13, 346);
+            this.lblPseudoInverse.Location = new System.Drawing.Point(13, 298);
             this.lblPseudoInverse.Name = "lblPseudoInverse";
-            this.lblPseudoInverse.Size = new System.Drawing.Size(139, 13);
+            this.lblPseudoInverse.Size = new System.Drawing.Size(150, 13);
             this.lblPseudoInverse.TabIndex = 8;
-            this.lblPseudoInverse.Text = "Псевдообернена матриця";
+            this.lblPseudoInverse.Text = "Транспонированая матрица";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(9, 716);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(297, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Умножить транспонированую матрицу на изначальную";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.MultiplyBaseMatrixWithTrans);
+            // 
+            // multipliedBaseTrans
+            // 
+            this.multipliedBaseTrans.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.multipliedBaseTrans.Location = new System.Drawing.Point(10, 534);
+            this.multipliedBaseTrans.Multiline = true;
+            this.multipliedBaseTrans.Name = "multipliedBaseTrans";
+            this.multipliedBaseTrans.ReadOnly = true;
+            this.multipliedBaseTrans.Size = new System.Drawing.Size(296, 176);
+            this.multipliedBaseTrans.TabIndex = 10;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(326, 42);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 38);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Выполнить сингулярное разложение";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.DoSvd);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(367, 13);
+            this.label2.Location = new System.Drawing.Point(323, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Невідомі";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Сингулярный вектор матрицы";
+            // 
+            // singularVectorBox
+            // 
+            this.singularVectorBox.Location = new System.Drawing.Point(326, 99);
+            this.singularVectorBox.Multiline = true;
+            this.singularVectorBox.Name = "singularVectorBox";
+            this.singularVectorBox.ReadOnly = true;
+            this.singularVectorBox.Size = new System.Drawing.Size(190, 55);
+            this.singularVectorBox.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(493, 13);
+            this.label3.Location = new System.Drawing.Point(323, 162);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Права частина";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "U матрица";
             // 
-            // Form1
+            // uMatrixBox
+            // 
+            this.uMatrixBox.Location = new System.Drawing.Point(326, 178);
+            this.uMatrixBox.Multiline = true;
+            this.uMatrixBox.Name = "uMatrixBox";
+            this.uMatrixBox.ReadOnly = true;
+            this.uMatrixBox.Size = new System.Drawing.Size(207, 96);
+            this.uMatrixBox.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(323, 283);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "VT матрица";
+            // 
+            // vtMatrixBox
+            // 
+            this.vtMatrixBox.Location = new System.Drawing.Point(326, 299);
+            this.vtMatrixBox.Multiline = true;
+            this.vtMatrixBox.Name = "vtMatrixBox";
+            this.vtMatrixBox.ReadOnly = true;
+            this.vtMatrixBox.Size = new System.Drawing.Size(207, 96);
+            this.vtMatrixBox.TabIndex = 17;
+            // 
+            // wMatrixBox
+            // 
+            this.wMatrixBox.Location = new System.Drawing.Point(326, 417);
+            this.wMatrixBox.Multiline = true;
+            this.wMatrixBox.Name = "wMatrixBox";
+            this.wMatrixBox.ReadOnly = true;
+            this.wMatrixBox.Size = new System.Drawing.Size(207, 96);
+            this.wMatrixBox.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(323, 401);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "W матрица";
+            // 
+            // MatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 569);
+            this.ClientSize = new System.Drawing.Size(985, 745);
+            this.Controls.Add(this.wMatrixBox);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.vtMatrixBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.uMatrixBox);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.singularVectorBox);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.multipliedBaseTrans);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblPseudoInverse);
-            this.Controls.Add(this.txtPInv);
-            this.Controls.Add(this.btnClick);
-            this.Controls.Add(this.txtB);
-            this.Controls.Add(this.lblEqual);
-            this.Controls.Add(this.txtSolution);
-            this.Controls.Add(this.lblMultiply);
+            this.Controls.Add(this.transposedMatrixBox);
+            this.Controls.Add(this.transponovanaButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtMatrix);
-            this.Name = "Form1";
+            this.Controls.Add(this.baseMatrixBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.Name = "MatrixForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "SLAR ";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,17 +229,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtMatrix;
+        private System.Windows.Forms.TextBox baseMatrixBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblMultiply;
-        private System.Windows.Forms.TextBox txtSolution;
-        private System.Windows.Forms.Label lblEqual;
-        private System.Windows.Forms.TextBox txtB;
-        private System.Windows.Forms.Button btnClick;
-        private System.Windows.Forms.TextBox txtPInv;
+        private System.Windows.Forms.Button transponovanaButton;
+        private System.Windows.Forms.TextBox transposedMatrixBox;
         private System.Windows.Forms.Label lblPseudoInverse;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox multipliedBaseTrans;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox singularVectorBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox uMatrixBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox vtMatrixBox;
+        private System.Windows.Forms.TextBox wMatrixBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -7,24 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 
 namespace LA
 {
-    public partial class Form1 : Form
+    public partial class MatrixForm : Form
     {
-        public Form1()
+        public MatrixForm()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void GetTransMatrix(object sender, EventArgs e)
         {
-            Matrix m = Matrix.Parse(txtMatrix.Text);
-            Matrix pinv = m.GetPseudoInverse();
-            txtPInv.Text = pinv.ToString();
-            Matrix rhs = Matrix.Parse(txtB.Text);
-            Matrix sol = Matrix.Multiply(pinv, rhs);
-            txtSolution.Text = sol.ToString();
+            baseMatrixBox.Text = Matrix.Parse(baseMatrixBox.Text).ToString();
+            var baseMatrix = Matrix.Parse(baseMatrixBox.Text);
+            transposedMatrixBox.Text = Matrix.Transpose(baseMatrix).ToString();
+            //Matrix.GetSvd(baseMatrix);
+        }
+
+        private void MultiplyBaseMatrixWithTrans(object sender, EventArgs e)
+        {
+            Matrix matr1 = Matrix.Parse(baseMatrixBox.Text);
+            Matrix matr2 = Matrix.Parse(transposedMatrixBox.Text);
+            Matrix resultMatrix = Matrix.Multiply(matr1, matr2);
+            multipliedBaseTrans.Text = resultMatrix.ToString();
+        }
+
+        private void DoSvd(object sender, EventArgs e)
+        {
+            MathNet.Numerics.LinearAlgebra.Factorization.Svd<double> svd = Matrix.GetSvd(Matrix.Parse(baseMatrixBox.Text));
+            double[] singularVectorCoordinates = new double[3];
+            int i = 0;
+            foreach (var row in svd.S)
+            {
+                singularVectorBox.Text += double.Parse(row.ToString())+"\r\n";
+            }
+            //singularVectorBox.Text = singularVectorCoordinates.ToString();
+
         }
     }
 }

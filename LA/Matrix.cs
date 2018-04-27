@@ -4,67 +4,68 @@
 
 using System;
 using System.Text.RegularExpressions;
-
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 
 public class Matrix
 {
-    public int rows;
-    public int cols;
-    public double[,] mat;
+    public int Rows;
+    public int Columns;
+    public double[,] Values;
 
     //public Matrix L;
-    public Matrix U;
-    private int[] pi;
-    private double detOfP = 1;
+    //public Matrix U;
+    //private int[] pi;
+    //private double detOfP = 1;
 
-    private double eps = 1e-6;
+    private const double Eps = 1e-6;
 
     public Matrix(int iRows, int iCols)         // Matrix Class constructor
     {
-        rows = iRows;
-        cols = iCols;
-        mat = new double[rows, cols];
+        Rows = iRows;
+        Columns = iCols;
+        Values = new double[Rows, Columns];
     }
 
     public Boolean IsSquare()
     {
-        return (rows == cols);
+        return (Rows == Columns);
     }
 
     public double this[int iRow, int iCol]      // Access this matrix as a 2D array
     {
-        get { return mat[iRow, iCol]; }
+        get { return Values[iRow, iCol]; }
         set {
-            if (Math.Abs(value) >= eps){ 
-                mat[iRow, iCol] = value;
+            if (Math.Abs(value) >= Eps){ 
+                Values[iRow, iCol] = value;
                 }
             else{
-                mat[iRow, iCol] = 0;
+                Values[iRow, iCol] = 0;
             }
         }
     }
 
     public Matrix GetCol(int k)
     {
-        Matrix m = new Matrix(rows, 1);
-        for (int i = 0; i < rows; i++) m[i, 0] = this[i, k];
+        Matrix m = new Matrix(Rows, 1);
+        for (int i = 0; i < Rows; i++) m[i, 0] = this[i, k];
         return m;
     }
 
     public void SetCol(Matrix v, int k)
     {
-        for (int i = 0; i < rows; i++) mat[i, k] = v[i, 0];
+        for (int i = 0; i < Rows; i++) Values[i, k] = v[i, 0];
     }
 
 
-    public bool isZeroMatrix()
+    public bool IsZeroMatrix()
     {
         bool res = true; 
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < Rows; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < Columns; j++)
             {
-                if (Math.Abs(this[i, j]) >= eps)
+                if (Math.Abs(this[i, j]) >= Eps)
                 {
                     res = false;
                 }
@@ -76,8 +77,8 @@ public class Matrix
 
     public Matrix Column(int k)
     {
-        Matrix col = new Matrix(rows, 1);
-        for (int i = 0;i < rows; i++)
+        Matrix col = new Matrix(Rows, 1);
+        for (int i = 0;i < Rows; i++)
         {
             col[i, 0] = this[i, k];
         }
@@ -85,9 +86,9 @@ public class Matrix
     }
     public Matrix GetFirstKCols (int k)
     {
-        Matrix res = new Matrix(rows, k + 1);
+        Matrix res = new Matrix(Rows, k + 1);
         {
-            for(int i = 0; i < rows; i++)
+            for(int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < k + 1; j++)
                 {
@@ -97,64 +98,64 @@ public class Matrix
         }
         return res;
     }
-    public static Matrix GetA1_plus(Matrix A1)
+    public static Matrix GetA1_plus(Matrix a1)
     {
-        Matrix A1_tr = Transpose(A1);
-        Matrix prod = Multiply(A1_tr, A1);
+        Matrix a1Tr = Transpose(a1);
+        Matrix prod = Multiply(a1Tr, a1);
         double res = 1.0 / prod[0, 0];
-        Matrix A1_plus = Multiply(res, A1_tr);
-        return A1_plus;
+        Matrix a1Plus = Multiply(res, a1Tr);
+        return a1Plus;
     }
 
     public Matrix GetPseudoInverse()
     {
-        Matrix matrix = ZeroMatrix(cols, rows);
-        Matrix a1 = this.Column(0);
+        Matrix matrix = ZeroMatrix(Columns, Rows);
+        Matrix a1 = Column(0);
 
-        bool isZero = a1.isZeroMatrix();
-        Matrix A1_plus ;
+        bool isZero = a1.IsZeroMatrix();
+        Matrix a1Plus ;
         if (!isZero) {
-            A1_plus = GetA1_plus(a1);
+            a1Plus = GetA1_plus(a1);
         }
         
         else {
-            A1_plus = ZeroMatrix(1, rows);
+            a1Plus = ZeroMatrix(1, Rows);
         }
-        Matrix A_prev = A1_plus.Duplicate();
-        for (int k = 1; k < cols; k++)
+        Matrix aPrev = a1Plus.Duplicate();
+        for (int k = 1; k < Columns; k++)
         {
             Matrix ak = Column(k);
-            Matrix dk = Multiply(A_prev, ak);
-            Matrix Ak_min_1 = GetFirstKCols(k - 1);
-            Matrix ck = ak - Multiply(Ak_min_1, dk);
+            Matrix dk = Multiply(aPrev, ak);
+            Matrix akMin1 = GetFirstKCols(k - 1);
+            Matrix ck = ak - Multiply(akMin1, dk);
             Matrix bk;
-            if (!ck.isZeroMatrix())
+            if (!ck.IsZeroMatrix())
             {
                 bk = GetA1_plus(ck);
             }
             else
             {
-                Matrix dk_tr = Transpose(dk);
-                Matrix prod = Multiply(dk_tr, dk);
-                bk = Multiply(Multiply((1.0/(1 + prod[0, 0])),dk_tr), A_prev);
+                Matrix dkTr = Transpose(dk);
+                Matrix prod = Multiply(dkTr, dk);
+                bk = Multiply(Multiply((1.0/(1 + prod[0, 0])),dkTr), aPrev);
             }
-            Matrix Bk = A_prev - Multiply(dk, bk);
-            Matrix A_next = Combine(Bk, bk); //Multiply(A_prev,)
-            A_prev = A_next.Duplicate();
+            Matrix Bk = aPrev - Multiply(dk, bk);
+            Matrix aNext = Combine(Bk, bk); //Multiply(A_prev,)
+            aPrev = aNext.Duplicate();
         }
-        A1_plus = A_prev;
-        return A1_plus;
+        a1Plus = aPrev;
+        return a1Plus;
     }
     public static Matrix Combine(Matrix a, Matrix b)
     {
-        Matrix res = new Matrix(a.rows + 1, a.cols);
-        for (int i = 0; i < a.rows; i++)
+        Matrix res = new Matrix(a.Rows + 1, a.Columns);
+        for (int i = 0; i < a.Rows; i++)
         {
-            for (int j = 0; j < a.cols; j++)
+            for (int j = 0; j < a.Columns; j++)
                 res[i, j] = a[i, j];
         }
-        int t = a.rows;
-        for (int jj = 0; jj < a.cols; jj++)
+        int t = a.Rows;
+        for (int jj = 0; jj < a.Columns; jj++)
         {
             res[t, jj] = b[0, jj];
         }
@@ -163,9 +164,9 @@ public class Matrix
 
     public Matrix Duplicate()                   // Function returns the copy of this matrix
     {
-        Matrix matrix = new Matrix(rows, cols);
-        for (int i = 0; i < rows; i++)
-            for (int j = 0; j < cols; j++)
+        Matrix matrix = new Matrix(Rows, Columns);
+        for (int i = 0; i < Rows; i++)
+            for (int j = 0; j < Columns; j++)
                 matrix[i, j] = this[i, j];
         return matrix;
     }
@@ -206,52 +207,80 @@ public class Matrix
         return matrix;
     }
 
-    public override string ToString()                           // Function returns matrix as a string
+    /// <summary>
+    /// Перегрузка метода ToString() для представления матрицы в соответствующем виде в виде переменной типа string
+    /// </summary>
+    /// <returns>Матрица в строчном типе переменной</returns>
+    public override string ToString()
     {
         string s = "";
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < Rows; i++)
         {
-            for (int j = 0; j < cols; j++) s += String.Format("{0,5:0.00}", mat[i, j]) + " ";
+            for (int j = 0; j < Columns; j++) s += String.Format("{0,5:0.00}", Values[i, j]) + " ";
             s += "\r\n";
         }
         return s;
     }
 
-    public static Matrix Transpose(Matrix m)              // Matrix transpose, for any rectangular matrix
+    /// <summary>
+    /// Транспонирование даной матрицы
+    /// </summary>
+    /// <param name="m">Матрица, для которой должно быть выполнено транспонирование</param>
+    /// <returns>Транспонированая матрица (A^T)</returns>
+    public static Matrix Transpose(Matrix m)
     {
-        Matrix t = new Matrix(m.cols, m.rows);
-        for (int i = 0; i < m.rows; i++)
-            for (int j = 0; j < m.cols; j++)
+        Matrix t = new Matrix(m.Columns, m.Rows);
+        for (int i = 0; i < m.Rows; i++)
+            for (int j = 0; j < m.Columns; j++)
                 t[j, i] = m[i, j];
         return t;
     }
   
-
-    public static Matrix Multiply(Matrix m1, Matrix m2)                  // matrix multiplication
+    /// <summary>
+    /// Умножение матриц
+    /// </summary>
+    /// <param name="m1">Первая матрица умножения</param>
+    /// <param name="m2">Матрица, на которую умножается первая матрица</param>
+    /// <returns>Производная матрица двух матриц</returns>
+    public static Matrix Multiply(Matrix m1, Matrix m2)
     {
-        if (m1.cols != m2.rows) throw new MException("Wrong dimensions of matrix!");
+        if (m1.Columns != m2.Rows) throw new MException("Wrong dimensions of matrix!");
 
-        Matrix result = ZeroMatrix(m1.rows, m2.cols);
-        for (int i = 0; i < result.rows; i++)
-            for (int j = 0; j < result.cols; j++)
-                for (int k = 0; k < m1.cols; k++)
+        Matrix result = ZeroMatrix(m1.Rows, m2.Columns);
+        for (int i = 0; i < result.Rows; i++)
+            for (int j = 0; j < result.Columns; j++)
+                for (int k = 0; k < m1.Columns; k++)
                     result[i, j] += m1[i, k] * m2[k, j];
         return result;
     }
-    private static Matrix Multiply(double n, Matrix m)                          // Multiplication by constant n
+
+    /// <summary>
+    /// Умножение матрицы на константу
+    /// </summary>
+    /// <param name="constant">Константа</param>
+    /// <param name="matrix">Матрица</param>
+    /// <returns>Матрица, умноженная на константу</returns>
+    private static Matrix Multiply(double constant, Matrix matrix)
     {
-        Matrix r = new Matrix(m.rows, m.cols);
-        for (int i = 0; i < m.rows; i++)
-            for (int j = 0; j < m.cols; j++)
-                r[i, j] = m[i, j] * n;
-        return r;
+        Matrix resultMatrix = new Matrix(matrix.Rows, matrix.Columns);
+        for (int i = 0; i < matrix.Rows; i++)
+            for (int j = 0; j < matrix.Columns; j++)
+                resultMatrix[i, j] = matrix[i, j] * constant;
+        return resultMatrix;
     }
-    private static Matrix Add(Matrix m1, Matrix m2)         // Sčítání matic
+
+    /// <summary>
+    /// Суммирование матриц
+    /// </summary>
+    /// <param name="m1">Матрица для суммирования</param>
+    /// <param name="m2">Матрица для суммирования</param>
+    /// <returns>Матрица сумма двух матриц</returns>
+    private static Matrix Add(Matrix m1, Matrix m2)
     {
-        if (m1.rows != m2.rows || m1.cols != m2.cols) throw new MException("Matrices must have the same dimensions!");
-        Matrix r = new Matrix(m1.rows, m1.cols);
-        for (int i = 0; i < r.rows; i++)
-            for (int j = 0; j < r.cols; j++)
+        if (m1.Rows != m2.Rows || m1.Columns != m2.Columns) throw new MException("Matrices must have the same dimensions!");
+        Matrix r = new Matrix(m1.Rows, m1.Columns);
+        for (int i = 0; i < r.Rows; i++)
+            for (int j = 0; j < r.Columns; j++)
                 r[i, j] = m1[i, j] + m2[i, j];
         return r;
     }
@@ -277,25 +306,38 @@ public class Matrix
         return matStr.Trim();
     }
 
+    public static Svd<double> GetSvd(Matrix matr)
+    {
+        int counter = 0;
+        double[] values = new double[matr.Rows*matr.Columns];
+        for (int i = 0; i < matr.Rows; i++)
+        {
+            for (int r = 0; r < matr.Columns; r++)
+            {
+                values[counter++] = matr.Values[i, r];
+            }
+        }
+        Matrix<double> m = Matrix<double>.Build.Dense(matr.Rows, matr.Columns, values);
+        return m.Svd();
+    }
+
     //   O P E R A T O R S
 
     public static Matrix operator -(Matrix m)
-    { return Matrix.Multiply(-1, m); }
+    { return Multiply(-1, m); }
 
     public static Matrix operator +(Matrix m1, Matrix m2)
-    { return Matrix.Add(m1, m2); }
+    { return Add(m1, m2); }
 
     public static Matrix operator -(Matrix m1, Matrix m2)
-    { return Matrix.Add(m1, -m2); }
+    { return Add(m1, -m2); }
 
     public static Matrix operator *(Matrix m1, Matrix m2)
-    { return Matrix.Multiply(m1, m2); }
+    { return Multiply(m1, m2); }
 
     public static Matrix operator *(double n, Matrix m)
-    { return Matrix.Multiply(n, m); }
+    { return Multiply(n, m); }
 }
-
-//  The class for exceptions
 
 public class MException : Exception
 {
