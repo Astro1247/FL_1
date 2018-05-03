@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
 namespace LA
@@ -100,6 +103,35 @@ namespace LA
             Matrix rightPart = Matrix.Parse(pseudoRightPartBox.Text);
             Matrix solutionMatrix = invMatr * rightPart;
             pseudoUnknownVatiablesBox.Text = solutionMatrix.ToString();
+        }
+
+        private void GetEigenNumbersButton_Click(object sender, EventArgs e)
+        {
+            Matrix matr1 = Matrix.Parse(baseMatrixBox.Text);
+            if (!matr1.IsSquare())
+            {
+                MessageBox.Show("Матрица должна быть квадратной!");
+                return;
+            }
+            double[] values = new double[matr1.Rows*matr1.Columns];
+            int counter = 0;
+            for (int i = 0; i < matr1.Rows; i++)
+            {
+                for (int j = 0; j < matr1.Columns; j++)
+                {
+                    values[counter++] = matr1.Values[i, j];
+                }
+            }
+            Evd<double> evd = MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.Dense(matr1.Rows, matr1.Columns, values).Evd();
+            eigenNumbersBox.Text = "";
+            double[] eigenNumbers = new double[matr1.Rows];
+            counter = 0;
+            foreach (var eigenvalue in evd.EigenValues.AsEnumerable())
+            {
+                //if (eigenvalue.Magnitude.CoerceZero() < 0.001) eigenNumbers[counter++] = 0;
+                //else eigenNumbers[counter++] = eigenvalue.Real;
+                eigenNumbersBox.Text += eigenvalue.Magnitude.CoerceZero(0.00001) + "\r\n";
+            }
         }
     }
 }

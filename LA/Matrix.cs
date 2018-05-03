@@ -47,6 +47,12 @@ namespace LA
             }
         }
 
+        public bool IsSquare()
+        {
+            if (Columns == Rows) return true;
+            return false;
+        }
+
         public bool IsZeroMatrix()
         {
             bool res = true; 

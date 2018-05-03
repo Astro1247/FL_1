@@ -54,6 +54,8 @@ namespace LA
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pseudoResultMatrixBox = new System.Windows.Forms.TextBox();
+            this.eigenNumbersBox = new System.Windows.Forms.TextBox();
+            this.GetEigenNumbersButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // baseMatrixBox
@@ -270,11 +272,32 @@ namespace LA
             this.pseudoResultMatrixBox.Size = new System.Drawing.Size(213, 96);
             this.pseudoResultMatrixBox.TabIndex = 26;
             // 
+            // eigenNumbersBox
+            // 
+            this.eigenNumbersBox.Location = new System.Drawing.Point(326, 579);
+            this.eigenNumbersBox.Multiline = true;
+            this.eigenNumbersBox.Name = "eigenNumbersBox";
+            this.eigenNumbersBox.ReadOnly = true;
+            this.eigenNumbersBox.Size = new System.Drawing.Size(213, 96);
+            this.eigenNumbersBox.TabIndex = 27;
+            // 
+            // GetEigenNumbersButton
+            // 
+            this.GetEigenNumbersButton.Location = new System.Drawing.Point(326, 681);
+            this.GetEigenNumbersButton.Name = "GetEigenNumbersButton";
+            this.GetEigenNumbersButton.Size = new System.Drawing.Size(213, 23);
+            this.GetEigenNumbersButton.TabIndex = 28;
+            this.GetEigenNumbersButton.Text = "Посчитать собственные числа";
+            this.GetEigenNumbersButton.UseVisualStyleBackColor = true;
+            this.GetEigenNumbersButton.Click += new System.EventHandler(this.GetEigenNumbersButton_Click);
+            // 
             // MatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 745);
+            this.Controls.Add(this.GetEigenNumbersButton);
+            this.Controls.Add(this.eigenNumbersBox);
             this.Controls.Add(this.pseudoResultMatrixBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -333,6 +356,8 @@ namespace LA
         private Label label7;
         private Label label8;
         private TextBox pseudoResultMatrixBox;
+        private TextBox eigenNumbersBox;
+        private Button GetEigenNumbersButton;
     }
 }
 
