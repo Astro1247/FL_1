@@ -88,29 +88,47 @@ namespace LA
             return a1Plus;
         }
 
+        public Matrix GetFirstKCols(int k)
+        {
+            Matrix res = new Matrix(Rows, k + 1);
+            {
+                for (int i = 0; i < Rows; i++)
+                {
+                    for (int j = 0; j < k + 1; j++)
+                    {
+                        res[i, j] = this[i, j];
+                    }
+                }
+            }
+            return res;
+        }
+
         /// <summary>
         /// Вычисление псевдообратной матрицы
         /// </summary>
         /// <returns>Псевдообратная матрица</returns>
         public Matrix GetPseudoInverse()
         {
+            Matrix matrix = ZeroMatrix(Columns, Rows);
             Matrix a1 = Column(0);
+
             bool isZero = a1.IsZeroMatrix();
-            var a1Plus = !isZero ? GetA1_plus(a1) : ZeroMatrix(1, Rows);
+            Matrix a1Plus;
+            if (!isZero)
+            {
+                a1Plus = GetA1_plus(a1);
+            }
+
+            else
+            {
+                a1Plus = ZeroMatrix(1, Rows);
+            }
             Matrix aPrev = a1Plus.Duplicate();
             for (int k = 1; k < Columns; k++)
             {
                 Matrix ak = Column(k);
                 Matrix dk = Multiply(aPrev, ak);
-                Matrix akMin1 = new Matrix(Rows, k + 1); {
-                    for (int i = 0; i < Rows; i++)
-                    {
-                        for (int j = 0; j < k + 1; j++)
-                        {
-                            akMin1[i, j] = this[i, j];
-                        }
-                    }
-                }
+                Matrix akMin1 = GetFirstKCols(k - 1);
                 Matrix ck = ak - Multiply(akMin1, dk);
                 Matrix bk;
                 if (!ck.IsZeroMatrix())
@@ -121,11 +139,10 @@ namespace LA
                 {
                     Matrix dkTr = Transpose(dk);
                     Matrix prod = Multiply(dkTr, dk);
-                    bk = Multiply(Multiply((1.0/(1 + prod[0, 0])),dkTr), aPrev);
+                    bk = Multiply(Multiply((1.0 / (1 + prod[0, 0])), dkTr), aPrev);
                 }
-                // ReSharper disable once InconsistentNaming
                 Matrix Bk = aPrev - Multiply(dk, bk);
-                Matrix aNext = Combine(Bk, bk);
+                Matrix aNext = Combine(Bk, bk); //Multiply(A_prev,)
                 aPrev = aNext.Duplicate();
             }
             a1Plus = aPrev;
