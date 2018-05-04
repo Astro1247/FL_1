@@ -102,9 +102,9 @@ namespace LA
             this.lblPseudoInverse.AutoSize = true;
             this.lblPseudoInverse.Location = new System.Drawing.Point(13, 298);
             this.lblPseudoInverse.Name = "lblPseudoInverse";
-            this.lblPseudoInverse.Size = new System.Drawing.Size(150, 13);
+            this.lblPseudoInverse.Size = new System.Drawing.Size(138, 13);
             this.lblPseudoInverse.TabIndex = 8;
-            this.lblPseudoInverse.Text = "Транспонированая матрица";
+            this.lblPseudoInverse.Text = "Транспоньована матриця";
             // 
             // button1
             // 
@@ -112,7 +112,7 @@ namespace LA
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(302, 23);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Умножить транспонированую матрицу на изначальную";
+            this.button1.Text = "Помножити початкову матрицю на транспоньовану\r\n";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.MultiplyBaseMatrixWithTrans);
             // 
@@ -132,7 +132,7 @@ namespace LA
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(190, 38);
             this.button2.TabIndex = 11;
-            this.button2.Text = "Выполнить сингулярное разложение";
+            this.button2.Text = "Виповнити сингулярний розклад матрицi";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.DoSvd);
             // 
@@ -141,9 +141,9 @@ namespace LA
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(323, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.Size = new System.Drawing.Size(152, 13);
             this.label2.TabIndex = 12;
-            this.label2.Text = "Сингулярный вектор матрицы";
+            this.label2.Text = "Сингулярний вектор матрицi";
             // 
             // singularVectorBox
             // 
@@ -161,7 +161,7 @@ namespace LA
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 14;
-            this.label3.Text = "U матрица";
+            this.label3.Text = "U матриця";
             // 
             // uMatrixBox
             // 
@@ -179,7 +179,7 @@ namespace LA
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 16;
-            this.label4.Text = "VT матрица";
+            this.label4.Text = "VT матриця";
             // 
             // vtMatrixBox
             // 
@@ -206,7 +206,7 @@ namespace LA
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 18;
-            this.label5.Text = "W матрица";
+            this.label5.Text = "W матриця";
             // 
             // pseudoRightPartBox
             // 
@@ -222,9 +222,9 @@ namespace LA
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(468, 307);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 13);
+            this.label6.Size = new System.Drawing.Size(139, 13);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Псевдообратная матрица";
+            this.label6.Text = "Псевдообернена матриця";
             // 
             // calulatePseudoButton
             // 
@@ -232,7 +232,7 @@ namespace LA
             this.calulatePseudoButton.Name = "calulatePseudoButton";
             this.calulatePseudoButton.Size = new System.Drawing.Size(213, 23);
             this.calulatePseudoButton.TabIndex = 22;
-            this.calulatePseudoButton.Text = "Посчитать псевдообратную матрицу";
+            this.calulatePseudoButton.Text = "Порахувати псевдообернену матрицю";
             this.calulatePseudoButton.UseVisualStyleBackColor = true;
             this.calulatePseudoButton.Click += new System.EventHandler(this.CalcPseudo);
             // 
@@ -250,18 +250,18 @@ namespace LA
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(326, 327);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 13);
+            this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 24;
-            this.label7.Text = "Неизвестные";
+            this.label7.Text = "Невiдомi";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(539, 327);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.Size = new System.Drawing.Size(82, 13);
             this.label8.TabIndex = 25;
-            this.label8.Text = "Правая часть";
+            this.label8.Text = "Права частина";
             // 
             // pseudoResultMatrixBox
             // 
@@ -287,7 +287,7 @@ namespace LA
             this.GetEigenNumbersButton.Name = "GetEigenNumbersButton";
             this.GetEigenNumbersButton.Size = new System.Drawing.Size(213, 23);
             this.GetEigenNumbersButton.TabIndex = 28;
-            this.GetEigenNumbersButton.Text = "Посчитать собственные числа";
+            this.GetEigenNumbersButton.Text = "Порахувати власнi числа";
             this.GetEigenNumbersButton.UseVisualStyleBackColor = true;
             this.GetEigenNumbersButton.Click += new System.EventHandler(this.GetEigenNumbersButton_Click);
             // 
